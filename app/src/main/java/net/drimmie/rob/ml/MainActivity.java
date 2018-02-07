@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void sendMessage(View view) {
+    public void open(View view) {
         Intent intent = new Intent(this, AccountActivity.class);
         String message = "open";
 

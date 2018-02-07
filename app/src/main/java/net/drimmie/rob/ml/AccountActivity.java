@@ -3,6 +3,9 @@ package net.drimmie.rob.ml;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +24,7 @@ public class AccountActivity extends AppCompatActivity {
 
         accountsListView = (ListView) findViewById(R.id.accountListView);
 
-        String[] accounts = new String [] {
+        String[] accounts = new String[]{
                 "Chequing", "Saving", "Tax Free", "Credit Card"
         };
         ArrayList<String> accountList = new ArrayList<String>();
@@ -31,6 +34,19 @@ public class AccountActivity extends AppCompatActivity {
 
         accountsListView.setAdapter(accountListAdapter);
 
+        accountsListView.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                // Do something when a list item is clicked
+                Intent intent = new Intent(getApplicationContext(), AccountDetailActivity.class);
+                String message = "some account";
+
+                intent.putExtra("name", "value");
+                startActivity(intent);
+            }
+        });
     }
 }
 
