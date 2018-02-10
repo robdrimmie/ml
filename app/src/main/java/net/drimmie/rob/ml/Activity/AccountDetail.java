@@ -1,4 +1,4 @@
-package net.drimmie.rob.ml.activity;
+package net.drimmie.rob.ml.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
