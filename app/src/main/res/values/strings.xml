@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">ml</string>
-    <string name="welcome_screen">Hire Rob!</string>
+    <string name="welcome_screen">Hello Rob!</string>
     <string name="open_button_label">Open</string>
 </resources>

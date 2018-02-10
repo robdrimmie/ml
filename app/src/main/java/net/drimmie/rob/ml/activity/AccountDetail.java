@@ -1,11 +1,13 @@
-package net.drimmie.rob.ml;
+package net.drimmie.rob.ml.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class AccountDetailActivity extends AppCompatActivity {
+import net.drimmie.rob.ml.R;
+
+public class AccountDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

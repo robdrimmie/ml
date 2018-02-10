@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,17 +17,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AccountActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".AccountList"
+            android:parentActivityName=".activity.Main">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.Main" />
         </activity>
         <activity
-            android:name=".AccountDetailActivity"
-            android:parentActivityName=".AccountActivity"
+            android:name=".activity.AccountDetail"
+            android:parentActivityName=".AccountList"
             ></activity>
     </application>
 
