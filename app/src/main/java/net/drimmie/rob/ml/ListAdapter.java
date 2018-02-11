@@ -10,6 +10,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class ListAdapter extends ArrayAdapter<JSONObject>{
@@ -34,9 +36,12 @@ public class ListAdapter extends ArrayAdapter<JSONObject>{
         TextView balance = (TextView) itemView.findViewById(R.id.account_item_balance);
 
         try {
-            name.setText(accounts.get(position).getString("id"));
-            number.setText(accounts.get(position).getString("name"));
-            balance.setText(accounts.get(position).getString("sex"));
+            name.setText(accounts.get(position).getString("display_name"));
+            number.setText(accounts.get(position).getString("account_number"));
+            String formattedBalance = DecimalFormat.getCurrencyInstance().format(
+                    Double.parseDouble(accounts.get(position).getString("balance"))
+            );
+            balance.setText(formattedBalance);
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
