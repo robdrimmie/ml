@@ -1,6 +1,7 @@
 package net.drimmie.rob.ml.Activity;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,10 @@ public class AccountDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_detail);
 
+        Toolbar myToolbar = findViewById(R.id.accounts_toolbar);
+        setSupportActionBar(myToolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         String message = intent.getStringExtra(AccountList.SELECTED_ACCOUNT);
