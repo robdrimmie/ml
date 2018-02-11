@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class AccountList extends AppCompatActivity {
+public class AccountList extends AccountBase {
     public static final String SELECTED_ACCOUNT = "net.drimmie.rob.ml.SELECTED_ACCOUNT";
 
     @Override
@@ -69,44 +69,6 @@ public class AccountList extends AppCompatActivity {
         });
 
         accountListView.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.quit, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_quit:
-                quitToMain();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    protected void quitToMain() {
-        Context context = getApplicationContext();
-        SharedPreferences sharedPref = context.getSharedPreferences(
-                getString(R.string.preference_file_key),
-                Context.MODE_PRIVATE
-        );
-
-        // TODO: Move preference management into single place
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(
-                getString(R.string.preference_opened),
-                getResources().getInteger(R.integer.preference_opened_false)
-        );
-        editor.apply();
-
-        finish();
     }
 }
 
