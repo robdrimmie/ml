@@ -1,4 +1,9 @@
 # Application Challenge
+
+## Trying it out
+
+This is a very simple project and doesn't use any dependencies or require any custom build flow. The easiest way to try it out is to clone the repository, open the project in Android Studio and run the app from there.
+
 ##### Coding challenge for prospective candidates
 
 ### Intructions
