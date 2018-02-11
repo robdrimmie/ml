@@ -18,13 +18,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AccountList"
+            android:name=".Activity.AccountList"
             >
         </activity>
         <activity
             android:name=".Activity.AccountDetail"
-            android:parentActivityName=".AccountList"
-            ></activity>
+            android:parentActivityName=".Activity.AccountList"
+            />
     </application>
 
 </manifest>

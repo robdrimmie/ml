@@ -1,4 +1,4 @@
-package net.drimmie.rob.ml;
+package net.drimmie.rob.ml.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +16,13 @@ import android.widget.ListView;
 
 import net.drimmie.rob.ml.Activity.AccountDetail;
 import net.drimmie.rob.ml.Activity.Main;
+import net.drimmie.rob.ml.ListAdapter;
+import net.drimmie.rob.ml.Model.Account;
+import net.drimmie.rob.ml.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +38,21 @@ public class AccountList extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.accounts_toolbar);
         setSupportActionBar(myToolbar);
+
+        Account account = new Account(getApplicationContext());
+
+        ArrayList<JSONObject> listItems = account.getAccounts();
+
+        ListView accountListView = findViewById(R.id.accountListView);
+
+        ListAdapter adapter = new ListAdapter(
+        this,
+                R.layout.account_item,
+                R.id.account_item_display_name,
+                listItems
+        );
+
+        accountListView.setAdapter(adapter);
     }
 
     @Override
@@ -60,7 +79,7 @@ public class AccountList extends AppCompatActivity {
         Context context = getApplicationContext();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key),
-                context.MODE_PRIVATE
+                Context.MODE_PRIVATE
         );
 
         // TODO: Move preference management into single place
@@ -69,49 +88,9 @@ public class AccountList extends AppCompatActivity {
                 getString(R.string.preference_opened),
                 getResources().getInteger(R.integer.preference_opened_false)
         );
-        editor.commit();
+        editor.apply();
 
         finish();
-    }
-
-    private void oldstuff() {
-//        accountsListView = (ListView) findViewById(R.id.accountListView);
-
-        Intent intent = getIntent();
-//
-//        JSONArray accountsJ;
-////        try {
-//            //accountsJ = new JSONArray(intent.getStringExtra(Main.ACCOUNTS));
-//
-//            //Log.d("wtf", new Integer(accountsJ.length()).toString());
-//            String[] accounts = new String[]{
-//                    "Chequing", "Saving", "Tax Free", "Credit Card"
-//            };
-//            ArrayList<String> accountList = new ArrayList<String>();
-//            accountList.addAll(Arrays.asList(accounts));
-//
-//            accountListAdapter = new ArrayAdapter<String>(this, R.layout.account_item, accountList);
-//
-//            accountsListView.setAdapter(accountListAdapter);
-//
-//            accountsListView.setOnItemClickListener(new ListView.OnItemClickListener() {
-//
-//
-//                @Override
-//                public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-//                    // Do something when a list item is clicked
-//                    Intent intent = new Intent(getApplicationContext(), AccountDetail.class);
-//                    String message = "some account";
-//
-//                    intent.putExtra("name", "value");
-//                    startActivity(intent);
-//                }
-//            });
-////        } catch (JSONException ex) {
-////            ex.printStackTrace();
-////        }
-
-
     }
 }
 
