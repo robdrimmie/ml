@@ -28,8 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AccountList extends AppCompatActivity {
-    private ListView accountsListView;
-    private ArrayAdapter <String> accountListAdapter;
+    public static final String SELECTED_ACCOUNT = "net.drimmie.rob.ml.SELECTED_ACCOUNT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class AccountList extends AppCompatActivity {
 
         Account account = new Account(getApplicationContext());
 
-        ArrayList<JSONObject> listItems = account.getAccounts();
+        final ArrayList<JSONObject> listItems = account.getAccounts();
 
         ListView accountListView = findViewById(R.id.accountListView);
 
@@ -51,6 +50,23 @@ public class AccountList extends AppCompatActivity {
                 R.id.account_item_display_name,
                 listItems
         );
+
+        accountListView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), AccountDetail.class);
+
+                try {
+                    String message = listItems.get(position).getString("id");
+
+                    intent.putExtra(SELECTED_ACCOUNT , message);
+                    startActivity(intent);
+
+                } catch (JSONException ex ) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         accountListView.setAdapter(adapter);
     }
