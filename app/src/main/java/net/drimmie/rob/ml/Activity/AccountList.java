@@ -1,31 +1,20 @@
 package net.drimmie.rob.ml.Activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import net.drimmie.rob.ml.Activity.AccountDetail;
-import net.drimmie.rob.ml.Activity.Main;
-import net.drimmie.rob.ml.ListAdapter;
+import net.drimmie.rob.ml.Adapter.ListAdapter;
 import net.drimmie.rob.ml.Model.Account;
 import net.drimmie.rob.ml.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AccountList extends AccountBase {
     public static final String SELECTED_ACCOUNT = "net.drimmie.rob.ml.SELECTED_ACCOUNT";

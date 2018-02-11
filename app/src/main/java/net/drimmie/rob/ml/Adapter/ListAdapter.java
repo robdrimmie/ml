@@ -1,4 +1,4 @@
-package net.drimmie.rob.ml;
+package net.drimmie.rob.ml.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import net.drimmie.rob.ml.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +16,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class ListAdapter extends ArrayAdapter<JSONObject>{
+public class ListAdapter extends BaseAdapter{
     private ArrayList<JSONObject> accounts;
     private Context context;
     private int resource;
@@ -38,10 +40,8 @@ public class ListAdapter extends ArrayAdapter<JSONObject>{
         try {
             name.setText(accounts.get(position).getString("display_name"));
             number.setText(accounts.get(position).getString("account_number"));
-            String formattedBalance = DecimalFormat.getCurrencyInstance().format(
-                    Double.parseDouble(accounts.get(position).getString("balance"))
-            );
-            balance.setText(formattedBalance);
+            balance.setText(this.format(accounts, position, "balance"));
+
         } catch (JSONException ex) {
             ex.printStackTrace();
         }

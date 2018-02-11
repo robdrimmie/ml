@@ -1,25 +1,16 @@
 package net.drimmie.rob.ml.Activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import net.drimmie.rob.ml.ListAdapter;
 import net.drimmie.rob.ml.Model.Account;
 import net.drimmie.rob.ml.R;
-import net.drimmie.rob.ml.TransactionAdapter;
+import net.drimmie.rob.ml.Adapter.TransactionAdapter;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -48,8 +39,8 @@ public class AccountDetail extends AppCompatActivity {
 
         TransactionAdapter adapter = new TransactionAdapter(
                 this,
-                R.layout.account_item,
-                R.id.account_item_display_name,
+                R.layout.transaction_item,
+                R.id.transaction_item_description,
                 transactionList
         );
 
