@@ -1,6 +1,7 @@
 package net.drimmie.rob.ml.Adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,24 +29,41 @@ public class ListAdapter extends BaseAdapter{
         this.accounts = accounts;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    static class ListViewHolder {
+        TextView name;
+        TextView number;
+        TextView balance;
+    }
 
-        View itemView = inflater.inflate(resource, parent, false);
-        TextView name = (TextView) itemView.findViewById(R.id.account_item_display_name);
-        TextView number = (TextView) itemView.findViewById(R.id.account_item_account_number);
-        TextView balance = (TextView) itemView.findViewById(R.id.account_item_balance);
+    @NonNull
+    @Override
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ListViewHolder holder;
+
+        if (convertView == null) {
+            convertView = inflater.inflate(resource, parent, false);
+
+            holder = new ListViewHolder();
+            holder.name = convertView.findViewById(R.id.account_item_display_name);
+            holder.number = convertView.findViewById(R.id.account_item_account_number);
+            holder.balance = convertView.findViewById(R.id.account_item_balance);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (ListViewHolder) convertView.getTag();
+        }
+
 
         try {
-            name.setText(accounts.get(position).getString("display_name"));
-            number.setText(accounts.get(position).getString("account_number"));
-            balance.setText(this.format(accounts, position, "balance"));
+            holder.name.setText(accounts.get(position).getString("display_name"));
+            holder.number.setText(accounts.get(position).getString("account_number"));
+            holder.balance.setText(this.currency(accounts, position, "balance"));
 
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
 
-        return itemView;
+        return convertView;
     }
 }

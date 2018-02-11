@@ -22,17 +22,18 @@ public class AccountDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_detail);
 
-        Toolbar myToolbar = findViewById(R.id.accounts_toolbar);
-        setSupportActionBar(myToolbar);
-
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-
-
         Intent intent = getIntent();
         String accountId = intent.getStringExtra(AccountList.SELECTED_ACCOUNT);
 
         Account account = new Account(getApplicationContext());
+
+        Toolbar toolbar = findViewById(R.id.accounts_toolbar);
+        toolbar.setTitle(account.name(accountId));
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
         final ArrayList<JSONObject> transactionList = account.transactions(accountId);
 
         ListView transactionListView = findViewById(R.id.transactionListView);

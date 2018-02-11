@@ -31,37 +31,57 @@ public class TransactionAdapter extends BaseAdapter{
         this.transactions = transactions;
     }
 
+    static class ListViewHolder {
+        TextView description;
+        TextView amount;
+        TextView date;
+        TextView balance;
+
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ListViewHolder holder;
 
-        View itemView = inflater.inflate(resource, parent, false);
-        TextView description = itemView.findViewById(R.id.transaction_item_description);
-        TextView amount = itemView.findViewById(R.id.transaction_item_amount);
-        TextView balance = itemView.findViewById(R.id.transaction_item_balance);
+        if (convertView == null) {
+            convertView = inflater.inflate(resource, parent, false);
+
+            holder = new ListViewHolder();
+            holder.description = convertView.findViewById(R.id.transaction_item_description);
+            holder.amount = convertView.findViewById(R.id.transaction_item_amount);
+            holder.date = convertView.findViewById(R.id.transaction_item_date);
+            holder.balance = convertView.findViewById(R.id.transaction_item_balance);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (ListViewHolder) convertView.getTag();
+        }
+
 
         try {
-            description.setText(transactions.get(position).getString("description"));
+            holder.description.setText(transactions.get(position).getString("description"));
 
             String formattedAmount = "";
             if (transactions.get(position).has("deposit_amount")) {
-                amount.setTextColor(Color.BLACK);
-                formattedAmount = this.format(transactions, position, "deposit_amount");
+                holder.amount.setTextColor(Color.BLACK);
+                formattedAmount = this.currency(transactions, position, "deposit_amount");
             }
 
             if (transactions.get(position).has("withdrawal_amount")) {
-                amount.setTextColor(Color.RED);
-                formattedAmount = this.format(transactions, position, "withdrawal_amount");
+                holder.amount.setTextColor(Color.RED);
+                formattedAmount = this.currency(transactions, position, "withdrawal_amount");
             }
 
-            amount.setText(formattedAmount);
+            holder.amount.setText(formattedAmount);
 
-            balance.setText(this.format(transactions, position, "balance"));
+            holder.date.setText(this.date(transactions, position, "date"));
+            holder.balance.setText(this.currency(transactions, position, "balance"));
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
 
-        return itemView;
+        return convertView;
     }
 }

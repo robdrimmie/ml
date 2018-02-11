@@ -24,8 +24,9 @@ public class AccountList extends AccountBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        Toolbar myToolbar = findViewById(R.id.accounts_toolbar);
-        setSupportActionBar(myToolbar);
+        Toolbar toolbar = findViewById(R.id.accounts_toolbar);
+        toolbar.setTitle(R.string.activity_account_title);
+        setSupportActionBar(toolbar);
 
         Account account = new Account(getApplicationContext());
 

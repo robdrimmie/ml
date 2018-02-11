@@ -40,7 +40,7 @@ public class Account {
     }
 
     public ArrayList<JSONObject> getAccounts() {
-        ArrayList<JSONObject> list = new ArrayList<JSONObject>();
+        ArrayList<JSONObject> list = new ArrayList<>();
 
         String data = loadJSONFromAsset("listOfAccounts.json");
 
@@ -54,6 +54,27 @@ public class Account {
         }
 
         return list;
+    }
+
+    public String name(String accountId) {
+        String name = "";
+
+        String data = loadJSONFromAsset("listOfAccounts.json");
+
+        try {
+            JSONArray accounts = new JSONArray(data);
+            for (int accountIndex = 0; accountIndex < accounts.length(); accountIndex++) {
+                JSONObject account = accounts.getJSONObject(accountIndex);
+
+                if (String.valueOf(account.get("id")).equals(accountId)) {
+                    return account.get("display_name").toString();
+                }
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return name;
     }
 
     public ArrayList<JSONObject> transactions(String accountId) {

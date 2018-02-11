@@ -6,7 +6,6 @@
     tools:context=".AccountList">
     <item
         android:id="@+id/action_quit"
-        android:title="@string/action_quit"
+        android:title="@string/activity_account_quit"
         app:showAsAction="always" />
-
 </menu>

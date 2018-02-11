@@ -8,10 +8,6 @@ import android.view.MenuItem;
 
 import net.drimmie.rob.ml.R;
 
-/**
- * Created by robdrimmie on 2018-02-11.
- */
-
 public class AccountBase extends AppCompatActivity {
 
     @Override
@@ -41,7 +37,6 @@ public class AccountBase extends AppCompatActivity {
                 Context.MODE_PRIVATE
         );
 
-        // TODO: Move preference management into single place
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(
                 getString(R.string.preference_opened),

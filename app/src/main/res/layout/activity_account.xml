@@ -18,10 +18,10 @@
 
     <ListView
         android:id="@+id/accountListView"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/accounts_toolbar"
+        app:layout_constraintLeft_toLeftOf="@+id/accounts_toolbar"
         tools:layout_editor_absoluteX="8dp" />
 
 </android.support.constraint.ConstraintLayout>

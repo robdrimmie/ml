@@ -17,7 +17,6 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: Move preference management into single place
         Context context = getApplicationContext();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key),
@@ -46,7 +45,6 @@ public class Main extends AppCompatActivity {
                 Context.MODE_PRIVATE
         );
 
-        // TODO: Move preference management into single place
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(
                 getString(R.string.preference_opened),
