@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class Account {
     private Context context;
-    private JSONArray accounts;
 
     public Account(Context context) {
         this.context = context;
@@ -40,24 +39,46 @@ public class Account {
         return json;
     }
 
-    private void load(String filename) {
-        String data = loadJSONFromAsset(filename);
-
-        try {
-            accounts = new JSONArray(data);
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public ArrayList<JSONObject> getAccounts() {
         ArrayList<JSONObject> list = new ArrayList<JSONObject>();
 
-        this.load("listOfAccounts.json");
+        String data = loadJSONFromAsset("listOfAccounts.json");
 
         try {
-            for (int accountIndex = 0; accountIndex < this.accounts.length(); accountIndex++) {
-                list.add(this.accounts.getJSONObject(accountIndex));
+            JSONArray accounts = new JSONArray(data);
+            for (int accountIndex = 0; accountIndex < accounts.length(); accountIndex++) {
+                list.add(accounts.getJSONObject(accountIndex));
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public ArrayList<JSONObject> transactions(String accountId) {
+        ArrayList<JSONObject> list = new ArrayList<>();
+
+        String data = loadJSONFromAsset("accountTransactions.json");
+
+        try {
+            JSONArray accounts = new JSONArray(data);
+
+            for (int accountIndex = 0; accountIndex < accounts.length(); accountIndex++) {
+                JSONObject allTransactions = accounts.getJSONObject(accountIndex);
+                if (allTransactions.has(accountId)) {
+                    JSONArray transactions = (JSONArray) allTransactions.get(accountId);
+
+                    for (int transactionIndex = 0; transactionIndex < transactions.length(); transactionIndex++ ) {
+                        JSONArray activities = (JSONArray) transactions.getJSONObject(transactionIndex).get("activity");
+
+                        for (int activityIndex = 0; activityIndex< activities.length(); activityIndex++) {
+                            list.add(activities.getJSONObject(activityIndex));
+                        }
+                    }
+
+                    return list;
+                }
             }
         } catch (JSONException ex) {
             ex.printStackTrace();

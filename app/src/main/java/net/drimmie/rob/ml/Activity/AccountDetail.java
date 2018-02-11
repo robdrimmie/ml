@@ -9,9 +9,20 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import net.drimmie.rob.ml.ListAdapter;
+import net.drimmie.rob.ml.Model.Account;
 import net.drimmie.rob.ml.R;
+import net.drimmie.rob.ml.TransactionAdapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class AccountDetail extends AppCompatActivity {
 
@@ -28,9 +39,20 @@ public class AccountDetail extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra(AccountList.SELECTED_ACCOUNT);
+        String accountId = intent.getStringExtra(AccountList.SELECTED_ACCOUNT);
 
-        TextView tv = findViewById(R.id.textView);
-        tv.setText(message);
+        Account account = new Account(getApplicationContext());
+        final ArrayList<JSONObject> transactionList = account.transactions(accountId);
+
+        ListView transactionListView = findViewById(R.id.transactionListView);
+
+        TransactionAdapter adapter = new TransactionAdapter(
+                this,
+                R.layout.account_item,
+                R.id.account_item_display_name,
+                transactionList
+        );
+
+        transactionListView.setAdapter(adapter);
     }
 }
